@@ -40,7 +40,7 @@ app.use("/posts", posts);
 app.use("/tags", tags);
 app.use("/reply", replies);
 
-const port = 5000;
+const port = 4000;
 //process.env.PORT || 4000;
 
 app.listen(port, () => {

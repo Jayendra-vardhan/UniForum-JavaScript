@@ -15,7 +15,7 @@ const app = express();
 
 mongoose
   .connect(
-    "mongodb+srv://Uniforum_JvS:qQrcsJdeKvvpFnsl@uniforumcluster0.kmrbvp8.mongodb.net/forum?retryWrites=true&w=majority"
+    "mongodb+srv://Uniforum_JvS:qQrcsJdeKvvpFnsl@uniforumcluster0.kmrbvp8.mongodb.net/test?retryWrites=true&w=majority"
   )
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("could not connect to mongoDB"));

@@ -11,7 +11,6 @@ const tags = require("./routes/tags");
 const replies = require("./routes/replies");
 const app = express();
 
-app.use(cookieParser());
 app.use(
   cors({
     origin: ["https://uniforum.vercel.app/"],
@@ -21,6 +20,7 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 //let mongoDBURL = process.env.mongoDBURL;
 

@@ -11,17 +11,6 @@ const tags = require("./routes/tags");
 const replies = require("./routes/replies");
 const app = express();
 
-app.use(
-  cors({
-    origin: ["https://uniforum.vercel.app/"],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-);
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-
 //let mongoDBURL = process.env.mongoDBURL;
 
 mongoose
@@ -34,6 +23,17 @@ mongoose
 app.get("/", (req, res) => {
   res.send("request successfully sent!");
 });
+
+app.use(
+  cors({
+    origin: ["https://uniforum.vercel.app/"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use("/users", users);
 app.use("/posts", posts);

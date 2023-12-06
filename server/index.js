@@ -26,13 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 mongoose
   .connect(
-    "mongodb+srv://Uniforum_JvS:qQrcsJdeKvvpFnsl@uniforumcluster0.kmrbvp8.mongodb.net/",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }
+    "mongodb+srv://Uniforum_JvS:qQrcsJdeKvvpFnsl@uniforumcluster0.kmrbvp8.mongodb.net/?retryWrites=true&w=majority"
   )
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("could not connect to mongoDB"));

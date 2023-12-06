@@ -5,7 +5,7 @@ const NavBar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark  sticky-top ">
       <NavLink className="navbar-brand" to="/">
-        UniForum
+        Community
       </NavLink>
       <button
         class="navbar-toggler"
@@ -51,7 +51,7 @@ const NavBar = ({ user }) => {
             <React.Fragment>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/me">
-                  Hi! {user.username}
+                  Hi {user.username}
                 </NavLink>
               </li>
               <li className="nav-item">

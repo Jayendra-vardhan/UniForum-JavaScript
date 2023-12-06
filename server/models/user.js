@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    minlength: 3,
+    minlength: 5,
     maxlength: 50,
   },
   email: {
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: 1024,
-    minlength: 4,
+    minlength: 5,
   },
   isAdmin: {
     type: Boolean,

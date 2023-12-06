@@ -46,7 +46,8 @@ app.use("/posts", posts);
 app.use("/tags", tags);
 app.use("/reply", replies);
 
-const port = process.env.PORT || 4000;
+const port = 5000;
+//process.env.PORT || 4000;
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`);

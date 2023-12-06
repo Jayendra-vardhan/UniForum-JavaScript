@@ -11,22 +11,31 @@ const tags = require("./routes/tags");
 const replies = require("./routes/replies");
 const app = express();
 
-let mongoDBURL = process.env.mongoDBURL;
-
-mongoose
-  .connect(mongoDBURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: ["https://uniforum.vercel.app/"],
+    methods: ["POST", "GET"],
+    credentials: true,
   })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("could not connect to mongoDB"));
-
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(cors());
+
+//let mongoDBURL = process.env.mongoDBURL;
+
+mongoose
+  .connect(
+    "mongodb+srv://Uniforum_JvS:qQrcsJdeKvvpFnsl@uniforumcluster0.kmrbvp8.mongodb.net/",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+    }
+  )
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("could not connect to mongoDB"));
 
 app.get("/", (req, res) => {
   res.send("request successfully sent!");

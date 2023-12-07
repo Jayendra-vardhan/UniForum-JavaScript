@@ -59,9 +59,8 @@ class Dashboard extends Component {
     const { allposts, pageSize, currentPage, tags, selectedTag } = this.state;
     const filtered = selectedTag._id === "1" ? allposts : this.getPosts();
     const posts = paginate(filtered, currentPage, pageSize);
-    if (allposts.length === 0)
-      <p>There are no posts in the database!</p>;
-
+    // if (allposts.length === 0)
+    //   return <p>There are no posts in the database!</p>;
     return (
       <React.Fragment>
         <Jumotron />

@@ -13,6 +13,9 @@ const app = express();
 
 let mongoDBURL = process.env.mongoDBURL;
 
+let mongoDBURL =
+  "mongodb+srv://Uniforum_JvS:qQrcsJdeKvvpFnsl@uniforumcluster0.kmrbvp8.mongodb.net/?retryWrites=true&w=majority";
+
 mongoose
   .connect(mongoDBURL, {
     useNewUrlParser: true,
@@ -37,7 +40,7 @@ app.use("/posts", posts);
 app.use("/tags", tags);
 app.use("/reply", replies);
 
-const port = process.env.PORT || 4000;
+const port = 5000;
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`);

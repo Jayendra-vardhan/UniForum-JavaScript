@@ -11,8 +11,6 @@ const tags = require("./routes/tags");
 const replies = require("./routes/replies");
 const app = express();
 
-let mongoDBURL = process.env.mongoDBURL;
-
 let mongoDBURL =
   "mongodb+srv://Uniforum_JvS:qQrcsJdeKvvpFnsl@uniforumcluster0.kmrbvp8.mongodb.net/?retryWrites=true&w=majority";
 

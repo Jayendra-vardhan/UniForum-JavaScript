@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["https://uniforum.vercel.app/"],
+    origin: ["https://uniforum-master-client.vercel.app/"],
     methods: ["POST", "GET"],
     credentials: true,
   })

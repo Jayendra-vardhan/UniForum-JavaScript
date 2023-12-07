@@ -24,7 +24,10 @@ router.post("/register", async (req, res) => {
   });
   try {
     await user.save();
-    const token = jwt.sign({ _id: user._id, isAdmin: user.isAdmin }, "JvS");
+    const token = jwt.sign(
+      { _id: user._id, isAdmin: user.isAdmin },
+      process.env.jwtPrivateKey
+    );
     res
       .header("x-auth-token", token)
       .header("access-control-expose-headers", "x-auth-token")
@@ -57,7 +60,10 @@ router.post("/login", async (req, res) => {
   const validpassword = await bcrypt.compare(req.body.password, user.password);
   if (!validpassword) return res.status(400).send("invalid email or password");
 
-  const token = jwt.sign({ _id: user._id, isAdmin: user.isAdmin }, "JvS");
+  const token = jwt.sign(
+    { _id: user._id, isAdmin: user.isAdmin },
+    process.env.jwtPrivateKey
+  );
   res.header("x-auth-token").send(token);
 });
 

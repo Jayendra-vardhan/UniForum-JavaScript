@@ -3,7 +3,7 @@ import React from "react";
 const ListGroup = (props) => {
   const { items, selectedTag, onTagSelect } = props;
   return (
-    <ul className="list-group">
+    <ul className="list-group" style={{ flexWrap: "wrap" }}>
       {items.map((item) => (
         <li
           key={item._id}

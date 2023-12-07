@@ -11,8 +11,7 @@ const tags = require("./routes/tags");
 const replies = require("./routes/replies");
 const app = express();
 
-let mongoDBURL =
-  "mongodb+srv://Uniforum_JvS:qQrcsJdeKvvpFnsl@uniforumcluster0.kmrbvp8.mongodb.net/?retryWrites=true&w=majority";
+let mongoDBURL = process.env.mongoDBURL;
 
 mongoose
   .connect(mongoDBURL, {
@@ -38,7 +37,7 @@ app.use("/posts", posts);
 app.use("/tags", tags);
 app.use("/reply", replies);
 
-const port = 5000;
+const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
   console.log(`App running on port ${port}`);

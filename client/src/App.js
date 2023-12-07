@@ -1,7 +1,6 @@
-import "./App.css";
 import React, { Component } from "react";
 import jwtDecode from "jwt-decode";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 
 import http from "./services/httpService";
 import { api } from "./config.js";
@@ -18,6 +17,7 @@ import PostPage from "./components/PostPage";
 
 class App extends Component {
   state = {};
+
   async componentDidMount() {
     try {
       const jwt = localStorage.getItem("token");
@@ -26,19 +26,31 @@ class App extends Component {
       this.setState({ user: user.data });
     } catch (ex) {}
   }
+
+  handleRedirectToLogin = () => {
+    const { history } = this.props;
+    history.push("/users/login");
+  };
+
   render() {
+    console.log(this.state.user === undefined);
+
     return (
       <div>
         <NavBar user={this.state.user} />
-        {/* on the dashboard, have a quesry string parameter to 
-       to find the method of sorting of posts.(using query string package) */}
         <Switch>
           <Route path="/users/login" component={Log} />
           <Route path="/users/register" component={Register} />
           <Route path="/users/logout" component={Logout} />
           <Route
             path="/dashboard"
-            render={(props) => <Dashboard {...props} user={this.state.user} />}
+            render={() =>
+              this.state.user !== undefined ? (
+                <Dashboard user={this.state.user} />
+              ) : (
+                this.handleRedirectToLogin()
+              )
+            }
           />
           <Route path="/not-found" component={NotFound} />
           <ProtectedRoute
@@ -58,4 +70,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

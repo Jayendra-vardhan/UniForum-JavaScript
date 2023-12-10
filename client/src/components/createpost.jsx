@@ -6,7 +6,6 @@ import Form from "./common/form";
 import http from "../services/httpService";
 import { api } from "../config.js";
 import { createpost } from "../services/postCreateService";
-
 class NewPost extends Form {
   state = {
     data: { title: "", description: "", tags: [] },
@@ -48,9 +47,10 @@ class NewPost extends Form {
       const { data } = this.state;
       const { response } = await createpost(data);
       console.log(response);
-      window.location = "/dashboard";
-    } catch (ex) {}
+      this.props.history.push("/dashboard");
+    } catch (ex) { }
   };
+
   render() {
     const { data, errors, tags } = this.state;
     return (
@@ -95,7 +95,6 @@ class NewPost extends Form {
                         key={tag._id}
                         className="form-check-input"
                         type="checkbox"
-                        onChange={() => this.handleTagChange(tag._id)}
                       />
                       {tag.name}
                     </label>
@@ -107,14 +106,15 @@ class NewPost extends Form {
                 <button
                   className="btn btn-primary mt-4"
                   disabled={this.validate()}
+                  onClick={this.handleSubmit}
                 >
                   Submit
                 </button>
               </div>
             </form>
           </div>
-        </div>
-      </React.Fragment>
+        </div >
+      </React.Fragment >
     );
   }
 }

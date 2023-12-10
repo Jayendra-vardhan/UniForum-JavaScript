@@ -60,22 +60,17 @@ class PostPage extends Component {
 	};
 	handleReplyUpvote = async (id) => {
 		try {
-			const replies_old = [...this.state.replies];
-			const reply_updated = await http.put(
-				api.repliesEndPoint + "like/" + id,
-				{}
-			);
-			const { data: replies } = await http.get(
-				api.repliesEndPoint + "/" + this.props.match.params.id
-			);
-			console.log(replies);
-			this.setState({ replies: replies });
+			// const replies_old = [...this.state.replies]; // Removed unused variable
+			await http.put(api.repliesEndPoint + "like/" + id, {});
+			const { data: replies } = await http.get(api.repliesEndPoint + "/" + this.props.match.params.id);
+			this.setState({ replies });
 		} catch (ex) {
 			if (ex.response && ex.response.status === 400) {
 				toast.error("You can't upvote your own reply!");
 			}
 		}
 	};
+
 	render() {
 		const { post, replies } = this.state;
 		const { user } = this.props;

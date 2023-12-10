@@ -2,7 +2,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-axios.defaults.headers.common["x-auth-token"] = localStorage.getItem("token");
+// Retrieve the token from localStorage
+const token = localStorage.getItem("token");
+
+// Set the token in the default headers if it exists
+if (token) {
+  axios.defaults.headers.common["x-auth-token"] = token;
+}
 
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
@@ -11,16 +17,19 @@ axios.interceptors.response.use(null, (error) => {
     error.response.status < 500;
 
   if (!expectedError) {
-    toast("An unexpected error occured!");
+    toast.error("An unexpected error occurred!");
   }
-  console.log(error.response.status)
+
+  console.log(error.response.status);
   console.log(error);
   return Promise.reject(error);
 });
 
-export default {
+const httpService = {
   get: axios.get,
   post: axios.post,
   put: axios.put,
   delete: axios.delete,
 };
+
+export default httpService;

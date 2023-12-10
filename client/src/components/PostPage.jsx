@@ -23,12 +23,15 @@ class PostPage extends Component {
 		const id = this.props.match.params.id;
 		const { data: post } = await http.get(api.postsEndPoint + id);
 		const { data: replies } = await http.get(api.repliesEndPoint + id);
+		console.log('Replies Data:', replies);
+
 		this.setState({ post: post, replies: replies });
 	}
+
 	checkLike() {
 		const { user } = this.props;
 		const { post } = this.state;
-		//console.log(user);
+		console.log("this user is active: ", user);
 		if (user && post.upvotes && post.upvotes.includes(user._id)) return true;
 		else return false;
 	}
@@ -61,24 +64,23 @@ class PostPage extends Component {
 	handleReplyUpvote = async (id) => {
 		try {
 			const replies_old = [...this.state.replies];
-			const reply_updated = await http.put(
-				api.repliesEndPoint + "like/" + id,
-				{}
-			);
-			const { data: replies } = await http.get(
-				api.repliesEndPoint + "/" + this.props.match.params.id
-			);
+			const reply_updated = await http.put(api.repliesEndPoint + "like/" + id, {});
+			const { data: replies } = await http.get(api.repliesEndPoint + "/" + this.props.match.params.id);
 			console.log(replies);
 			this.setState({ replies: replies });
-		} catch (ex) {
+		}
+		catch (ex) {
 			if (ex.response && ex.response.status === 400) {
 				toast.error("You can't upvote your own reply!");
 			}
 		}
 	};
 	render() {
-		const { post, replies } = this.state;
+
 		const { user } = this.props;
+		const { post, replies } = this.state;
+		console.log('Post State:', post);
+		console.log('Replies State:', replies);
 		return (
 			<div>
 				<ToastContainer />

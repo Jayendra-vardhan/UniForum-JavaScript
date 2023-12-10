@@ -14,7 +14,7 @@ class Dashboard extends Component {
 		currentPage: 1,
 		pageSize: 4,
 		tags: [],
-		selectedTag: { _id: "0", name: "All Posts" },
+		selectedTag: { _id: "1", name: "All Posts" },
 	};
 	async componentDidMount() {
 		const { data: allposts } = await http.get(api.postsEndPoint);
@@ -34,34 +34,26 @@ class Dashboard extends Component {
 	handlePageChange = (page) => {
 		this.setState({ currentPage: page });
 	};
-	handlePostDelete = (post) => { };
+	handlePostDelete = (post) => {};
 	handleTagSelect = (tag) => {
-		this.setState({ selectedTag: tag, currentPage: 1 });	// Handling tag selection
+		this.setState({ selectedTag: tag, currentPage: 1 });
 	};
 	getPosts() {
-		const { allposts, selectedTag } = this.state;			// Filtering posts based on selected tag
+		const { allposts, selectedTag } = this.state;
 		const filtered = [];
-		if (selectedTag._id === "0") {
-			// If "All Posts" tag is selected, return all posts
-			return allposts;
-		}
-		else {
-			for (let i in allposts) {
-				const post = allposts[i];
-				const { tags } = post;
-				for (let j in tags) {
-					if (tags[j].name === selectedTag.name) {
-						filtered.push(post);
-						break;
-					}
+		for (let i in allposts) {
+			const post = allposts[i];
+			const { tags } = post;
+			for (let j in tags) {
+				if (tags[j].name === selectedTag.name) {
+					filtered.push(post);
+					break;
 				}
 			}
 		}
-
 		console.log(filtered);
 		return filtered;
 	}
-
 	render() {
 		const { user } = this.props;
 		const { allposts, pageSize, currentPage, tags, selectedTag } = this.state;

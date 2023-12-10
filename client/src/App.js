@@ -24,7 +24,7 @@ class App extends Component {
       const user_jwt = jwtDecode(jwt);
       const user = await http.get(`${api.usersEndPoint}${user_jwt._id}`);
       this.setState({ user: user.data });
-    } catch (ex) {}
+    } catch (ex) { }
   }
 
   handleRedirectToLogin = () => {

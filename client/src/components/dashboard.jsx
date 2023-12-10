@@ -36,24 +36,32 @@ class Dashboard extends Component {
 	};
 	handlePostDelete = (post) => { };
 	handleTagSelect = (tag) => {
-		this.setState({ selectedTag: tag, currentPage: 1 });
+		this.setState({ selectedTag: tag, currentPage: 1 });	// Handling tag selection
 	};
 	getPosts() {
-		const { allposts, selectedTag } = this.state;
+		const { allposts, selectedTag } = this.state;			// Filtering posts based on selected tag
 		const filtered = [];
-		for (let i in allposts) {
-			const post = allposts[i];
-			const { tags } = post;
-			for (let j in tags) {
-				if (tags[j].name === selectedTag.name) {
-					filtered.push(post);
-					break;
+		if (selectedTag._id === "0") {
+			// If "All Posts" tag is selected, return all posts
+			return allposts;
+		}
+		else {
+			for (let i in allposts) {
+				const post = allposts[i];
+				const { tags } = post;
+				for (let j in tags) {
+					if (tags[j].name === selectedTag.name) {
+						filtered.push(post);
+						break;
+					}
 				}
 			}
 		}
+
 		console.log(filtered);
 		return filtered;
 	}
+
 	render() {
 		const { user } = this.props;
 		const { allposts, pageSize, currentPage, tags, selectedTag } = this.state;

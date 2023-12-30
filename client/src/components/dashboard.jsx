@@ -34,7 +34,7 @@ class Dashboard extends Component {
 	handlePageChange = (page) => {
 		this.setState({ currentPage: page });
 	};
-	handlePostDelete = (post) => {};
+	handlePostDelete = (post) => { };
 	handleTagSelect = (tag) => {
 		this.setState({ selectedTag: tag, currentPage: 1 });
 	};

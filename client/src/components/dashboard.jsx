@@ -67,14 +67,14 @@ class Dashboard extends Component {
 				<div className="container">
 					<div className="row">
 						<div className="col">
-							<div className="d-flex w-100 justify-content-between m-3">
+							<div className="d-flex w-100 justify-content-between m-3" style={{ padding: 15, alignItems: "center" }}>
 								Showing {filtered.length} posts.
 								{user && (
 									<Link to="/new-post">
 										<button
 											type="button"
 											className="btn btn-success"
-											style={{ marginBottom: 20 }}
+											style={{ margin: 20 }}
 										>
 											New Post
 										</button>
@@ -94,14 +94,15 @@ class Dashboard extends Component {
 								onTagSelect={this.handleTagSelect}
 							/>
 						</div>
-						<Pagination
-							itemCount={filtered.length}
-							pageSize={pageSize}
-							currentPage={currentPage}
-							onPageChange={this.handlePageChange}
-						/>
 					</div>
+					<Pagination
+						itemCount={filtered.length}
+						pageSize={pageSize}
+						currentPage={currentPage}
+						onPageChange={this.handlePageChange}
+					/>
 				</div>
+
 			</React.Fragment>
 		);
 	}

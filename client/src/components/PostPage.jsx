@@ -21,9 +21,12 @@ class PostPage extends Component {
 	};
 	async componentDidMount() {
 		const id = this.props.match.params.id;
+		//console.log(id);
 		const { data: post } = await http.get(api.postsEndPoint + id);
-		const { data: replies } = await http.get(api.repliesEndPoint + id);
-		this.setState({ post: post, replies: replies });
+		//console.log(post);
+		//const { data: replies } = await http.get(api.repliesEndPoint + id);
+		//console.log(replies);
+		this.setState({ post: post });//, replies: replies });
 	}
 	checkLike() {
 		const { user } = this.props;

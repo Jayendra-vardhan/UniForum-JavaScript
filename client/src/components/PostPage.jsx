@@ -24,9 +24,9 @@ class PostPage extends Component {
 		//console.log(id);
 		const { data: post } = await http.get(api.postsEndPoint + id);
 		//console.log(post);
-		//const { data: replies } = await http.get(api.repliesEndPoint + id);
+		const { data: replies } = await http.get(api.repliesEndPoint + id);
 		//console.log(replies);
-		this.setState({ post: post });//, replies: replies });
+		this.setState({ post: post, replies: replies });
 	}
 	checkLike() {
 		const { user } = this.props;
@@ -50,7 +50,7 @@ class PostPage extends Component {
 	handleUpvote = async () => {
 		try {
 			const { data: post } = await http.put(
-				api.postEndPoint + "like/" + this.props.match.params.id,
+				api.postsEndPoint + "like/" + this.props.match.params.id,
 				{}
 			);
 			console.log(post);

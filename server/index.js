@@ -30,9 +30,9 @@ app.use(
   cors({
     origin: [
       "https://uniforum-master-client.vercel.app",
-      "http://localhost:3000","http://localhost:3000/post"
+      "http://localhost:3000"
     ],
-    methods: ["POST", "GET"],
+    methods: ["POST", "GET", "PUT"],
     credentials: true,
   })
 );

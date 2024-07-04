@@ -32,7 +32,7 @@ app.use(
       "https://uniforum-master-client.vercel.app",
       "http://localhost:3000"
     ],
-    methods: ["POST", "GET", "PUT"],
+    methods: ["POST", "GET", "PUT","DELETE","UPDATE"],
     credentials: true,
   })
 );

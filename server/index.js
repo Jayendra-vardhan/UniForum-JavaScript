@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(cors({
                 origin: [
                   "https://uniforum-master-client.vercel.app",
-                  "http://localhost:3000"
+                  "client:3000"
                 ],
                 methods: ["POST", "GET", "PUT","DELETE","UPDATE"],
                 credentials: true,
@@ -35,7 +35,7 @@ app.use("/posts", posts);
 app.use("/tags", tags);
 app.use("/reply", replies);
 
-const port = 4000;
+const port = 5000;
 app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });

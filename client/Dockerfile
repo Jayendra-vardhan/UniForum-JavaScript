@@ -1,7 +1,6 @@
-# Useing the official Node.js image as the base image
 FROM node:current-slim
 
-WORKDIR /usr/src/app
+WORKDIR /Uniforum-client/app
 
 COPY package*.json ./
 
@@ -9,12 +8,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
+CMD [ "node","index.js" ]
 
-# Useing nginx to serve the React app
-FROM nginx:alpine
-COPY --from=0 /usr/src/app/build /usr/share/nginx/html
-
-EXPOSE 80
-
-# No CMD needed as nginx will start by default
+EXPOSE 3000

@@ -1,6 +1,6 @@
 FROM node:current-slim
 
-WORKDIR /usr/src/app
+WORKDIR /Uniforum-server/app
 
 COPY package*.json ./
 

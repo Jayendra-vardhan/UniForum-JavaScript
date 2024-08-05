@@ -1,13 +1,15 @@
 FROM node:current-slim
 
-WORKDIR /Uniforum-client/app
-
-COPY package*.json ./
+COPY package*.json .
 
 RUN npm install
 
 COPY . .
 
-CMD [ "node","index.js" ]
+# Build the React app
+RUN npm run build
 
 EXPOSE 3000
+
+# Command to serve the React app
+CMD ["npm", "start"]

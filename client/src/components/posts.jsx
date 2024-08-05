@@ -25,7 +25,7 @@ const Posts = (props) => {
 							</span>
 						))}
 						<h6 className="mt-2">
-							{post?.upvotes.length} Likes | {post?.views} Views
+							{post?.upVotes.length} Likes | {post?.views} Views
 						</h6>
 					</div>
 				</Link>

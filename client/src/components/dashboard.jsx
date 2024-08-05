@@ -1,27 +1,27 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "./common/pagination";
-import ListGroup from "./listgroup";
+import ListGroup from "./listGroup.jsx";
 import Posts from "./posts";
 import { paginate } from "../utils/paginate";
 import { api } from "../config.js";
 import http from "../services/httpService";
-import Jumotron from "./common/jumbotron";
+import Jumbotron from "./common/jumbotron"; 
 
 class Dashboard extends Component {
 	state = {
-		allposts: [],
+		allPosts: [],
 		currentPage: 1,
 		pageSize: 4,
 		tags: [],
 		selectedTag: { _id: "1", name: "All Posts" },
 	};
 	async componentDidMount() {
-		const { data: allposts } = await http.get(api.postsEndPoint);
+		const { data: allPosts } = await http.get(api.postsEndPoint);
 		const { data: tags } = await http.get(api.tagsEndPoint);
 
 		this.setState({
-			allposts: [...allposts],
+			allPosts: [...allPosts],
 			tags: [
 				{
 					_id: "1",
@@ -39,10 +39,10 @@ class Dashboard extends Component {
 		this.setState({ selectedTag: tag, currentPage: 1 });
 	};
 	getPosts() {
-		const { allposts, selectedTag } = this.state;
+		const { allPosts, selectedTag } = this.state;
 		const filtered = [];
-		for (let i in allposts) {
-			const post = allposts[i];
+		for (let i in allPosts) {
+			const post = allPosts[i];
 			const { tags } = post;
 			for (let j in tags) {
 				if (tags[j].name === selectedTag.name) {
@@ -56,14 +56,14 @@ class Dashboard extends Component {
 	}
 	render() {
 		const { user } = this.props;
-		const { allposts, pageSize, currentPage, tags, selectedTag } = this.state;
-		const filtered = selectedTag._id === "1" ? allposts : this.getPosts();
+		const { allPosts, pageSize, currentPage, tags, selectedTag } = this.state;
+		const filtered = selectedTag._id === "1" ? allPosts : this.getPosts();
 		const posts = paginate(filtered, currentPage, pageSize);
-		if (allposts.length === 0)
+		if (allPosts.length === 0)
 			return <p>There are no posts in the database!</p>;
 		return (
 			<React.Fragment>
-				<Jumotron />
+				<Jumbotron />
 				<div className="container">
 					<div className="row">
 						<div className="col">

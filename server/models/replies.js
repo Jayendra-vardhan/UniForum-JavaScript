@@ -18,7 +18,7 @@ const replySchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  upvotes: {
+  upVotes: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: "User",
     default: [],

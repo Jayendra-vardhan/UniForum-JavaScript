@@ -47,7 +47,7 @@ router.put("/like/:id", auth, async (req, res) => {
 
     if (reply.author.equals(req.user._id)) return res.status(400).json({ error: "You can't upvote your own reply" });
 
-    const upvoteArray = reply.upvotes;
+    const upvoteArray = reply.upVotes;
     const index = upvoteArray.indexOf(req.user._id);
 
     if (index === -1) {
@@ -56,7 +56,7 @@ router.put("/like/:id", auth, async (req, res) => {
       upvoteArray.splice(index, 1);
     }
 
-    reply.upvotes = upvoteArray;
+    reply.upVotes = upvoteArray;
     await reply.save();
     const reply_new = await Reply.findById(reply._id).populate("author", "name username");
     res.json({ data: reply_new });

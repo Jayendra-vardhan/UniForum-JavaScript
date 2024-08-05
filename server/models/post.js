@@ -36,7 +36,7 @@ const postSchema = new mongoose.Schema({
     default: 1,
     min: 1,
   },
-  upvotes: {
+  upVotes: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: "User",
     default: [],

@@ -14,7 +14,7 @@ class PostPage extends Component {
 			title: "",
 			tags: [],
 			author: [],
-			upvotes: [],
+			upVotes: [],
 			views: 0,
 		},
 		replies: [],
@@ -32,7 +32,7 @@ class PostPage extends Component {
 		const { user } = this.props;
 		const { post } = this.state;
 		//console.log(user);
-		if (user && post.upvotes && post.upvotes.includes(user._id)) return true;
+		if (user && post.upVotes && post.upVotes.includes(user._id)) return true;
 		else return false;
 	}
 	checkReplyLike(id) {
@@ -41,7 +41,7 @@ class PostPage extends Component {
 		if (user) {
 			for (let i in replies) {
 				if (replies[i]._id === id) {
-					if (replies[i].upvotes.includes(user._id)) return true;
+					if (replies[i].upVotes.includes(user._id)) return true;
 				}
 			}
 		}
@@ -102,7 +102,7 @@ class PostPage extends Component {
 								onClick={this.handleUpvote}
 							>
 								<HandThumbsUpFill className="mr-2" />
-								{(post.upvotes && post.upvotes.length) || 0}
+								{(post.upVotes && post.upVotes.length) || 0}
 							</button>
 							<p>{post.views} Views</p>
 						</div>
@@ -146,7 +146,7 @@ class PostPage extends Component {
 										}}
 									>
 										<HandThumbsUpFill className="mr-2" />
-										{reply.upvotes.length}
+										{reply.upVotes.length}
 									</button>
 									<p className="mb-1">
 										<Moment fromNow style={{ color: "#505050" }}>

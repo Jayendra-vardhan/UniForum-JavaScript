@@ -1,11 +1,11 @@
 import React from "react";
 import Joi from "joi-browser";
 import { ToastContainer, toast } from "react-toastify";
-import Input from "./common/input";
-import Form from "./common/form";
-import http from "../services/httpService";
+import Input from "./common/input.jsx";
+import Form from "./common/form.jsx";
+import http from "../services/httpService.js";
 import { api } from "../config.js";
-import { createpost } from "../services/postCreateService";
+import { createPost } from '../services/postCreateService';
 class NewPost extends Form {
   state = {
     data: { title: "", description: "", tags: [] },
@@ -20,14 +20,14 @@ class NewPost extends Form {
   handleTagChange = (tagID) => {
     console.log("hello");
     let data = this.state.data;
-    const newtags = data.tags;
-    const index = newtags.indexOf(tagID);
-    if (index === -1) newtags.push(tagID);
-    else newtags.splice(index, 1);
+    const newTags = data.tags;
+    const index = newTags.indexOf(tagID);
+    if (index === -1) newTags.push(tagID);
+    else newTags.splice(index, 1);
     data = {
       title: data.title,
       description: data.description,
-      tags: newtags,
+      tags: newTags,
     };
     console.log(data);
     this.setState({ data });
@@ -45,7 +45,7 @@ class NewPost extends Form {
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      const { response } = await createpost(data);
+      const { response } = await createPost(data);
       console.log(response);
       this.props.history.push("/dashboard");
     } catch (ex) { }

@@ -2,8 +2,7 @@ import React from "react";
 import Joi from "joi-browser";
 import {ToastContainer } from "react-toastify";
 import Form from "./common/form";
-import { createreply } from "../services/replyCreateService";
-import { Redirect } from "react-router-dom";
+import { createReply } from "../services/replyCreateService";
 
 class PostReply extends Form {
   state = {
@@ -18,7 +17,7 @@ class PostReply extends Form {
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      const { data: reply } = await createreply(data, this.props.id);
+      const { data: reply } = await createReply(data, this.props.id);
       window.location = `/post/${this.props.id}`;
     } catch (ex) {}
   };

@@ -9,13 +9,13 @@ import { login } from "../services/authService";
 
 // use programmatic navigation form login form to dashboard
 
-// add functionality to show react toast if the user is redierected to different locations due to history
+// add functionality to show react toast if the user is redirected to different locations due to history
 class Log extends Form {
   state = {
     data: { email: "", password: "" },
     errors: {
       email: "",
-      passowrd: "",
+      password: "",
     },
   };
   schema = {

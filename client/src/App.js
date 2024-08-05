@@ -5,9 +5,9 @@ import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import http from "./services/httpService";
 import { api } from "./config.js";
 import Dashboard from "./components/dashboard";
-import Jumotron from "./components/common/jumbotron";
+import Jumbotron from "./components/common/jumbotron";
 import NotFound from "./components/not-found";
-import NewPost from "./components/createpost";
+import NewPost from "./components/createPost.jsx";
 import Log from "./components/log";
 import Logout from "./components/logout";
 import Register from "./components/register";
@@ -60,7 +60,7 @@ class App extends Component {
             path="/post/:id"
             render={(props) => <PostPage {...props} user={this.state.user} />}
           />
-          <Route exact path="/" component={Jumotron} />
+          <Route exact path="/" component={Jumbotron} />
           <Redirect from="/users" to="/users/login " />
           <Redirect to="/not-found" />
         </Switch>

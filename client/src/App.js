@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import jwtDecode from "jwt-decode";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 
 import http from "./services/httpService";
 import { api } from "./config.js";
@@ -15,58 +15,40 @@ import NavBar from "./components/navbar";
 import ProtectedRoute from "./components/common/protectedRoute";
 import PostPage from "./components/PostPage";
 
-class App extends Component {
-  state = {};
+function App() {
+  const [user, setUser] = useState(undefined);
 
-  async componentDidMount() {
-    try {
-      const jwt = localStorage.getItem("token");
-      const user_jwt = jwtDecode(jwt);
-      const user = await http.get(`${api.usersEndPoint}${user_jwt._id}`);
-      this.setState({ user: user.data });
-    } catch (ex) {}
-  }
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const jwt = localStorage.getItem("token");
+        const user_jwt = jwtDecode(jwt);
+        const user = await http.get(`${api.usersEndPoint}${user_jwt._id}`);
+        setUser(user.data);
+      } catch (ex) {
+        // Handle error
+      }
+    }
+    fetchUser();
+  }, []);
 
-  handleRedirectToLogin = () => {
-    const { history } = this.props;
-    history.push("/");
-  };
-
-  render() {
-    console.log(this.state.user === undefined);
-    return (
-      <div>
-        <NavBar user={this.state.user} />
-        <Switch>
-          <Route path="/users/login" component={Log} />
-          <Route path="/users/register" component={Register} />
-          <Route path="/users/logout" component={Logout} />
-          <Route
-            path="/dashboard"
-            render={() =>
-              this.state.user !== undefined ? (
-                <Dashboard user={this.state.user} />
-              ) : (
-                this.handleRedirectToLogin()
-              )
-            }
-          />
-          <Route path="/not-found" component={NotFound} />
-          <ProtectedRoute
-            path="/new-post"
-            render={(props) => <NewPost {...props} user={this.state.user} />}
-          />
-          <Route
-            path="/post/:id"
-            render={(props) => <PostPage {...props} user={this.state.user} />}
-          />
-          <Route exact path="/" component={Jumbotron} />
-          <Redirect from="/users" to="/users/login " />
-          <Redirect to="/not-found" />
-        </Switch>
-      </div>
-    );
-  }
+  return (
+    <BrowserRouter>
+      <NavBar user={user} />
+      <Routes>
+        <Route path="/users/login" element={<Log />} />
+        <Route path="/users/register" element={<Register />} />
+        <Route path="/users/logout" element={<Logout />} />
+        <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to="/users/login" />} />
+        <Route path="/not-found" element={<NotFound />} />
+        <Route path="/new-post" element={<ProtectedRoute><NewPost user={user} /></ProtectedRoute>} />
+        <Route path="/post/:id" element={<PostPage user={user} />} />
+        <Route path="/" element={<Jumbotron />} />
+        <Route path="/users" element={<Navigate to="/users/login" />} />
+        <Route path="*" element={<Navigate to="/not-found" />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default withRouter(App);
+export default App;

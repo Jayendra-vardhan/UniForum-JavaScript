@@ -1,14 +1,16 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom/client"; // Ensure this import
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
-import App from "./App.js";
+import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 
+// Create a root
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+// Render the App component within the root
 root.render(
   <React.StrictMode>
     <BrowserRouter>
